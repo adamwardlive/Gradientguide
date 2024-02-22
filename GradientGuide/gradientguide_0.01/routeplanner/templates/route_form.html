@@ -1,0 +1,11 @@
+<!-- A simple form for user to input preferences -->
+<form method="post">
+    {% csrf_token %}
+    <label for="desired_distance">Desired Distance (km):</label>
+    <input type="number" name="desired_distance" required>
+
+    <label for="max_elevation_gain">Max Elevation Gain (m):</label>
+    <input type="number" name="max_elevation_gain" required>
+
+    <button type="submit">Find Routes</button>
+</form>

@@ -1,0 +1,10 @@
+<!-- Display optimized routes -->
+{% if routes %}
+    <ul>
+        {% for route in routes %}
+            <li>{{ route.name }} - Distance: {{ route.distance }} km, Elevation Gain: {{ route.elevation_gain }} m</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No suitable routes found based on your preferences.</p>
+{% endif %}
