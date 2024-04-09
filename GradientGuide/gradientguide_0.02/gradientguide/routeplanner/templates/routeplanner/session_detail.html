@@ -2,11 +2,72 @@
 <html>
 <head>
     <title>Session Details</title>
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <style>
+        #map { width: 100%; height: 400px; }
+    </style>
 </head>
 <body>
     <h2>Training Session Details</h2>
     <p>Duration: {{ session.duration }} minutes</p>
     <p>Power: {{ session.power }}W</p>
+    <p>Weight: {{ session.weight }} kg</p>
     <p>Estimated Distance: {{ distance }} km</p>
+
+    <div id="map"></div>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbXdhcmRoYnUiLCJhIjoiY2x1MTZ3dmRxMGZ1aDJuczNjczVoOXMybSJ9.EN8pBBjC6P76HNPCSpnu_g';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-74.50, 40], // Adjust this based on your needs or route data
+        zoom: 9
+    });
+
+    map.on('load', function () {
+        var routeData = JSON.parse('{{ route_data | safe }}'); // Parse the JSON string
+
+        if (routeData && routeData.coordinates) {
+            map.addSource('route', {
+                type: 'geojson',
+                data: {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: routeData
+                }
+            });
+
+            map.addLayer({
+                id: 'route',
+                type: 'line',
+                source: 'route',
+                layout: {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                paint: {
+                    'line-color': '#888',
+                    'line-width': 8
+                }
+            });
+
+            // Optionally, adjust the map to fit the route bounds
+            var bounds = routeData.coordinates.reduce(function(bounds, coord) {
+                return bounds.extend(coord);
+            }, new mapboxgl.LngLatBounds(routeData.coordinates[0], routeData.coordinates[0]));
+
+            map.fitBounds(bounds, {
+                padding: 20
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
+
+

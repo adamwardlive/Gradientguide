@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Guide Map</title>
+    <!-- Mapbox GL JS CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <style>
+        /* Style the map container */
+        #map {
+            width: 100%;
+            height: 100vh; /* Use 100% of the viewport height */
+        }
+        /* Style for the form container */
+        .form-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 5px;
+        }
+        input, button {
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form id="routeForm">
+            <input type="number" id="weight" name="weight" placeholder="Weight (kg)" required>
+            <input type="number" id="speed" name="speed" placeholder="Speed (km/h)" required>
+            <!-- Add other fields as needed -->
+            <button type="submit">Calculate Route</button>
+        </form>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbXdhcmRoYnUiLCJhIjoiY2x1MTZ3dmRxMGZ1aDJuczNjczVoOXMybSJ9.EN8pBBjC6P76HNPCSpnu_g';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [-74.50, 40],
+            zoom: 9
+        });
+
+        // Handle form submission
+        document.getElementById('routeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var weight = document.getElementById('weight').value;
+            var speed = document.getElementById('speed').value;
+            // Process other fields similarly
+
+            // TODO: Add your logic to calculate and display the route using the Mapbox Directions API
+            // This might involve sending the data to your backend to process and then displaying the route on the map
+        });
+    </script>
+</body>
+</html>
+

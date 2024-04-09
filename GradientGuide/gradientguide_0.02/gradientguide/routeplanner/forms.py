@@ -4,4 +4,6 @@ from .models import TrainingSession
 class TrainingSessionForm(forms.ModelForm):
     class Meta:
         model = TrainingSession
-        fields = ['duration', 'power']
+        fields = ['duration', 'power', 'weight', 'starting_location']
+        
+starting_location = forms.CharField(required=True)
