@@ -94,3 +94,22 @@ def calculate_route(request):
 
     # Redirect to the map view if it's not a POST request
     return redirect('show_map')
+
+# Home page view
+def home(request):
+    return render(request, 'routeplanner/home.html')
+
+# Build a Route view
+def new_session(request):
+    # Your existing logic for new session will go here
+    pass
+
+# Past Routes view
+def past_routes(request):
+    # Logic to fetch and display past routes will go here
+    pass
+
+# User Profile view
+def user_profile(request):
+    # Logic for user profile update will go here
+    pass

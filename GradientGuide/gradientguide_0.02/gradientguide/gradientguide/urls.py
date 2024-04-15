@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from routeplanner import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('routeplanner/', include('routeplanner.urls')),
+    path('', views.home, name='home'),
+    path('new/', views.session_input, name='session_input'),
+    path('session/<int:session_id>/', views.session_detail, name='session_detail'),
+    path('show-map/', views.show_map, name='show-map'),
+    path('past/', views.past_routes, name='past_routes'),
+    path('profile/', views.user_profile, name='user_profile'),
 ]
