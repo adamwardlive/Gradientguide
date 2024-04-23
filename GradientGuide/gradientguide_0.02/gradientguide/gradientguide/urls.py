@@ -26,4 +26,8 @@ urlpatterns = [
     path('show-map/', views.show_map, name='show-map'),
     path('past/', views.past_routes, name='past_routes'),
     path('profile/', views.user_profile, name='user_profile'),
+    path('session/<int:session_id>/delete/', views.delete_session, name='delete_session'),
+    path('session/<int:session_id>/update/', views.edit_session, name='edit_session'),
+    path('edit_session/<int:session_id>/', views.edit_session, name='edit_session'),
+
 ]

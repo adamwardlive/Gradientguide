@@ -1,0 +1,7 @@
+{% for data in session_data %}
+    <div class="card mb-3">
+        ...
+        <button onclick="location.href='{% url 'delete_session' data.session.id %}'">Delete</button>
+        <button onclick="location.href='{% url 'edit_session' data.session.id %}'">Edit</button>
+    </div>
+{% endfor %}
